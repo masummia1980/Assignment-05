@@ -32,7 +32,10 @@
                 array($fifthnumber,$sixthNumber),
                 array($seventhNumber,$eighthNumber)
                 );
-                  if(is_numeric($firstNumber) && is_numeric($secondNumber) &&  is_numeric($thirdNumber) && is_numeric($fourthNumber) && is_numeric($fifthnumber) && is_numeric($sixthNumber) && is_numeric($seventhNumber) && is_numeric($eighthNumber)){
+                  /*if(is_numeric($firstNumber) && is_numeric($secondNumber) &&  is_numeric($thirdNumber) && is_numeric($fourthNumber) && is_numeric($fifthnumber) && is_numeric($sixthNumber) && is_numeric($seventhNumber) && is_numeric($eighthNumber)){*/
+                
+                if(is_numeric($arr1[0][0]) && is_numeric($arr2[0][0]) &&  is_numeric($arr1[0][1]) && is_numeric($arr2[0][1]) && is_numeric($arr1[1][0])
+                   && is_numeric($arr2[1][0]) && is_numeric($arr1[1][1]) && is_numeric($arr2[1][1])){            
                     /* Martix Sum/Addition Function */  
                   if($operator=="Addition"){                      
                       $firstResult=$arr1[0][0] + $arr2[0][0];
