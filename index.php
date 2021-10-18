@@ -8,10 +8,11 @@
 </head>
 <?php 
 /* Matrix input function Start */
-    $firstResult='';
-    $secondResult='';
-    $thirdResult='';
-    $fourthResult='';
+      $result=array();
+      $result[0][0]="";
+      $result[0][1]="";
+      $result[1][0]="";
+      $result[1][1]="";
     if(isset($_POST["operator"])){
         $firstNumber=$_POST['firstNumber'];
         $secondNumber=$_POST['secondNumber'];
@@ -32,38 +33,34 @@
                 array($fifthnumber,$sixthNumber),
                 array($seventhNumber,$eighthNumber)
                 );
-                  /*if(is_numeric($firstNumber) && is_numeric($secondNumber) &&  is_numeric($thirdNumber) && is_numeric($fourthNumber) && is_numeric($fifthnumber) && is_numeric($sixthNumber) && is_numeric($seventhNumber) && is_numeric($eighthNumber)){*/
-                
-                if(is_numeric($arr1[0][0]) && is_numeric($arr2[0][0]) &&  is_numeric($arr1[0][1]) && is_numeric($arr2[0][1]) && is_numeric($arr1[1][0])
-                   && is_numeric($arr2[1][0]) && is_numeric($arr1[1][1]) && is_numeric($arr2[1][1])){            
-                    /* Martix Sum/Addition Function */  
-                  if($operator=="Addition"){                      
-                      $firstResult=$arr1[0][0] + $arr2[0][0];
-                      $secondResult=$arr1[0][1] + $arr2[0][1];
-                      $thirdResult=$arr1[1][0] + $arr2[1][0];
-                      $fourthResult=$arr1[1][1] + $arr2[1][1];
-                    }
-                    /* Martix Subtraction Function */
-                  elseif($operator=="Subtraction"){
-                    $firstResult=$arr1[0][0] - $arr2[0][0];
-                      $secondResult=$arr1[0][1] - $arr2[0][1];
-                      $thirdResult=$arr1[1][0] - $arr2[1][0];
-                      $fourthResult=$arr1[1][1] - $arr2[1][1];
-                    }
-                    /* Martix Multiply Function */
-                  elseif($operator=="Multiply"){
-                    $firstResult=$arr1[0][0] * $arr2[0][0];
-                      $secondResult=$arr1[0][1] * $arr2[0][1];
-                      $thirdResult=$arr1[1][0] * $arr2[1][0];
-                      $fourthResult=$arr1[1][1] * $arr2[1][1];
-                    } 
-            }                
-            
-        }
-        
-        
-    }
 
+                for($row=0;$row<count($arr1);$row++)
+                    {
+                      $size_of_col=count($arr1[$row]);
+                      for($col=0;$col<$size_of_col;$col++)
+                      {   
+                         /* Martix Sum/Addition Function */ 
+                        if($operator=="Addition")
+                        {
+                          $result[$row][$col]=$arr1[$row][$col]+$arr2[$row][$col];
+                        } 
+                        /* Martix Subtraction Function */
+                        else if($operator=="Subtraction")
+                        {
+                          $result[$row][$col]=$arr1[$row][$col]-$arr2[$row][$col];
+                        } 
+                         /* Martix Multiply Function */
+                        else
+                        {
+                            $result[0][0]= $arr1[0][0]*$arr2[0][0]+ $arr1[0][1]*$arr2[1][0];
+                            $result[0][1]= $arr1[0][0]*$arr2[0][1]+ $arr1[0][1]*$arr2[1][1];
+                            $result[1][0]= $arr1[1][0]*$arr2[0][0]+ $arr1[1][1]*$arr2[1][0];
+                            $result[1][1]= $arr1[1][0]*$arr2[0][1]+ $arr1[1][1]*$arr2[1][1];
+                        }        
+                      }   
+                  }
+                }
+              }     
 /* Matrix input function End */
 ?>
 <body>
@@ -71,34 +68,34 @@
     <div style="text-align: center;">
         <label><h1> Number Input</h1></label>
         <label>First Number</label>
-        <input type="number" name="firstNumber" value="firstNumber">
+        <input type="number" name="firstNumber" value="firstNumber" step="0.01">
         <label>Second Number</label>
-        <input type="number" name="secondNumber" value="secondNumber">
+        <input type="number" name="secondNumber" value="secondNumber" step="0.01">
         <label>Third Number</label>
-        <input type="number" name="thirdNumber" value="thirdNumber"> 
+        <input type="number" name="thirdNumber" value="thirdNumber" step="0.01"> 
         <label>Fourth Number</label>
-        <input type="number" name="fourthNumber" value="fourthNumber">
+        <input type="number" name="fourthNumber" value="fourthNumber" step="0.01">
         <br>
         <br>
         <label>Fifth Number</label>
-        <input type="number" name="fifthnumber" value="fifthnumber">
+        <input type="number" name="fifthnumber" value="fifthnumber" step="0.01">
         <label>Sixth Number</label>
-        <input type="number" name="sixthNumber" value="sixthNumber">
+        <input type="number" name="sixthNumber" value="sixthNumber" step="0.01">
         <label>Seventh Number</label>
-        <input type="number" name="seventhNumber" value="seventhNumber"> 
+        <input type="number" name="seventhNumber" value="seventhNumber" step="0.01"> 
         <label>Eighth Number</label>
-        <input type="number" name="eighthNumber" value="eighthNumber">
+        <input type="number" name="eighthNumber" value="eighthNumber" step="0.01">
         <br>
         <br>
         <label><h1>Show Input Result</h1></label>
         <label>First Result</label>
-        <input type="number" name="firstResult" value="<?php echo $firstResult;?>">
+        <input type="number" name="firstResult" value="<?php print_r($result[0][0]);?>">
         <label>Second Result</label>
-        <input type="number" name="secondResult" value="<?php echo $secondResult;?>">
+        <input type="number" name="secondResult" value="<?php print_r($result[0][1]);?>">
         <label>Third Result</label>
-        <input type="number" name="thirdResult" value="<?php echo $thirdResult;?>"> 
+        <input type="number" name="thirdResult" value="<?php print_r($result[1][0]);?>"> 
         <label>Fourth Result</label>
-        <input type="number" name="fourthResult" value="<?php echo $fourthResult;?>">
+        <input type="number" name="fourthResult" value="<?php print_r($result[1][1]);?>">
         <br>
         <br>
   </div>
@@ -110,3 +107,4 @@
 </form>
 </body>
 </html>
+
